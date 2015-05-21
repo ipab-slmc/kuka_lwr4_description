@@ -472,7 +472,7 @@
 
   <!-- Pen Tool-->
     <joint name="pen_base_joint" type="fixed" >
-      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0.075"/>
       <insert_block name="origin" />
       <parent link="lwr_arm_7_link" />
       <child link="pen_base_link" />
@@ -488,7 +488,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <cylinder length="0.2" radius="0.005"/>
+          <cylinder length="0.15" radius="0.005"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -496,13 +496,13 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <cylinder length="0.2" radius="0.005"/>
+          <cylinder length="0.15" radius="0.005"/>
         </geometry>
       </collision>
     </link>
     
     <joint name="pen_tip_joint" type="fixed" >
-      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0.075"/>
       <insert_block name="origin" />
       <parent link="pen_base_link" />
       <child link="pen_tip_link" />
@@ -525,7 +525,7 @@
     </link>
 
     <joint name="pen_ori_joint" type="fixed" >
-      <origin rpy="0 0 0" xyz="0 0 0.11"/>
+      <origin rpy="0 0 0" xyz="0 0 0.075"/>
       <insert_block name="origin" />
       <parent link="lwr_arm_7_link" />
       <child link="pen_ori_link" />
@@ -541,7 +541,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <cylinder length="0.1" radius="0.005"/>
+          <cylinder length="0.075" radius="0.005"/>
         </geometry>
         <material name="Non">
           <color rgba="0 0 0 0"/>
