@@ -81,14 +81,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="1 1 0.04"/>
+        <box size=".7 .75 0.04"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="1 1 0.04"/>
+        <box size=".8 .85 0.04"/>
       </geometry>
     </collision>
   </link>
@@ -473,6 +473,7 @@
   <!-- SHD hands-->
     <!-- joint between arm_7_link and sdh_palm_link -->
     <joint name="sdh_palm_joint" type="fixed" >
+      <origin rpy="0.0 0.0 -1.57079" xyz="0 0 0"/>
       <insert_block name="origin" />
       <parent link="lwr_arm_7_link" />
       <child link="sdh_palm_link" />
