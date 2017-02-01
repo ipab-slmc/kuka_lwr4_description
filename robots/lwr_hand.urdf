@@ -72,6 +72,15 @@
     <child link="world_link"/>
   </joint>
 -->
+
+<link name="world_frame"/>
+<joint name="world_base_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="world_frame"/>
+    <child link="base"/>
+  </joint>
+
+
   <link name="base">
     <inertial>
       <mass value="50.0"/>
@@ -79,21 +88,22 @@
       <inertia ixx="0.01" ixy="0.00" ixz="0.00" iyy="0.01" iyz="0.00" izz="0.01"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.02"/>
       <geometry>
         <box size=".7 .75 0.04"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.02"/>
       <geometry>
         <box size=".8 .85 0.04"/>
       </geometry>
     </collision>
   </link>
   <joint name="base_joint" type="fixed">
-    <origin rpy="0 0 3.14159265359" xyz="0 0 0.02"/>
+    <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+    <!--<origin rpy="0 0 3.14159265359" xyz="0 0 0.02"/>-->
     <parent link="base"/>
     <child link="lwr_arm_0_link"/>
   </joint>
