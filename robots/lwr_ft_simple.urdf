@@ -4,35 +4,6 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="lwr" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
-  <gazebo>
-    <plugin filename="librtt_gazebo_plugin.so" name="rtt_gazebo">
-      <opsScript>
-        import(&quot;rtt_ros&quot;);
-        ros.import(&quot;rtt_roscomm&quot;);
-        ros.import(&quot;rtt_rosparam&quot;);
-        ros.import(&quot;rtt_sensor_msgs&quot;);
-        ros.import(&quot;lwr_simulation&quot;);
-        ros.import(&quot;oro_joint_state_publisher&quot;);
-        
-        loadComponent(&quot;FRI&quot;,&quot;LWRController&quot;);
-        loadComponent(&quot;joints&quot;,&quot;JointStatePublisher&quot;);
-        
-        loadService(&quot;FRI&quot;,&quot;rosparam&quot;);
-        loadService(&quot;joints&quot;,&quot;rosparam&quot;);
-        
-        setActivity(&quot;FRI&quot;, 0.0, 5, ORO_SCHED_RT);
-        setActivity(&quot;joints&quot;, 0.02, 5, ORO_SCHED_RT);
-        
-        connect(&quot;FRI.JointPosition&quot;,&quot;joints.msrJntPos&quot;, ConnPolicy());
-        stream(&quot;joints.joints_state&quot;, rostopic.connection(&quot;/joints_state&quot;));
-        
-        joints.rosparam.refreshProperties();
-        joints.configure();
-        joints.start();
-      </opsScript>
-      <component>FRI</component>
-    </plugin>
-  </gazebo>
   <material name="DarkGrey">
     <color rgba="0.3 0.3 0.3 1.0"/>
   </material>
@@ -87,22 +58,32 @@
       <inertia ixx="0.00381666666667" ixy="0" ixz="0" iyy="0.0036" iyz="0" izz="0.00381666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.04 0 0.03"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/base.stl"/>
+        <box size="0.08 0.12 0.06"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.06"/>
       </geometry>
       <material name="Blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 3.14159265359" xyz="0 0 0.055"/>
+      <origin rpy="0 0 0" xyz="0.04 0 0.03"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_base_convex.stl"/>
+        <box size="0.08 0.12 0.06"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.06"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="calib_lwr_arm_base_link">
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
   <joint name="lwr_arm_0_joint" type="revolute">
     <origin rpy="0 0 3.14159265359" xyz="0 0 0.11"/>
     <axis xyz="0 0 1"/>
@@ -119,27 +100,39 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.008"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_1.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.12"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
       <material name="Blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_1_link">
-    <gravity>0</gravity>
-  </gazebo>
-  <transmission name="lwr_arm_0_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_0_motor"/>
-    <joint name="lwr_arm_0_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <!-- Third segment of the arm. Joint along y-axis -->
   <joint name="lwr_arm_1_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.2"/>
@@ -157,27 +150,39 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0.15"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_2.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.04 0.08"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.04 0"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
       <material name="Blue"/>
     </visual>
     <collision>
-      <origin rpy="3.14159265359 0 0" xyz="0 0 0.2"/>
+      <origin rpy="0 0 0" xyz="0 0 0.15"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0.04 0"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_2_link">
-    <gravity>0</gravity>
-  </gazebo>
-  <transmission name="lwr_arm_1_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_1_motor"/>
-    <joint name="lwr_arm_1_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <joint name="lwr_arm_2_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.20"/>
     <axis xyz="0 0 1"/>
@@ -194,27 +199,39 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.008"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_3.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.04 0.12"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.04 0.2"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
       <material name="Blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0.04 0.2"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_3_link">
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
-  <transmission name="lwr_arm_2_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_2_motor"/>
-    <joint name="lwr_arm_2_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <!-- fifth element of the arm. x-axis -->
   <joint name="lwr_arm_3_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.20"/>
@@ -232,27 +249,39 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0.15"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_4.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.08"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.04 0"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
       <material name="Blue"/>
     </visual>
     <collision>
-      <origin rpy="0 3.14159265359 0" xyz="0 0 0.2"/>
+      <origin rpy="0 0 0" xyz="0 0 0.15"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.04 0"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_4_link">
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
-  <transmission name="lwr_arm_3_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_3_motor"/>
-    <joint name="lwr_arm_3_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <joint name="lwr_arm_4_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.20"/>
     <axis xyz="0 0 1"/>
@@ -269,27 +298,39 @@
       <inertia ixx="0.0126506666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0108506666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.008"/>
-      <geometry name="lwr_arm_5_geom">
-        <mesh filename="package://lwr_defs/meshes/lwr/link_5.stl"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.12"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
       <material name="Blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_last_convex.stl"/>
+        <cylinder length="0.1" radius="0.06"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
+      <geometry>
+        <sphere radius="0.06"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_5_link">
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
-  <transmission name="lwr_arm_4_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_4_motor"/>
-    <joint name="lwr_arm_4_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <joint name="lwr_arm_5_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.19"/>
     <axis xyz="0 1 0"/>
@@ -306,27 +347,32 @@
       <inertia ixx="0.000520833333333" ixy="0" ixz="0" iyy="0.000520833333333" iyz="0" izz="0.000520833333333"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0.01 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_6.stl"/>
+        <sphere radius="0.07"/>
       </geometry>
       <material name="Grey"/>
     </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.01 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_wrist_convex.stl"/>
+        <sphere radius="0.07"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0.01 0"/>
+      <geometry>
+        <sphere radius="0.07"/>
+      </geometry>
+      <material name="Grey"/>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.01 0"/>
+      <geometry>
+        <sphere radius="0.07"/>
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_6_link">
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
-  <transmission name="lwr_arm_5_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_5_motor"/>
-    <joint name="lwr_arm_5_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <joint name="lwr_arm_6_joint" type="revolute">
     <origin rpy="0 0 3.14159265359" xyz="0 0 0.078"/>
     <axis xyz="0 0 1"/>
@@ -343,9 +389,9 @@
       <inertia ixx="0.0333333333333" ixy="0" ixz="0" iyy="0.0333333333333" iyz="0" izz="0.0333333333333"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 -0.785398163397" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_7.stl"/>
+        <cylinder length="0.05" radius="0.04"/>
       </geometry>
       <material name="Grey"/>
     </visual>
@@ -356,14 +402,6 @@
       </geometry>
     </collision>
   </link>
-  <gazebo reference="lwr_arm_7_link">
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
-  <transmission name="lwr_arm_6_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_6_motor"/>
-    <joint name="lwr_arm_6_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <link name="force_torque_sensor">
     <inertial>
       <mass value="0.2"/>
@@ -392,14 +430,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  <gazebo reference="force_torque_sensor">
-    <gravity>false</gravity>
-  </gazebo>
-  <transmission name="lwr_arm_6_trans" type="SimpleTransmission">
-    <actuator name="lwr_arm_6_motor"/>
-    <joint name="lwr_arm_6_joint"/>
-    <mechanicalReduction>1.0</mechanicalReduction>
-  </transmission>
   <joint name="force_torque_sensor_mount" type="fixed">
     <origin rpy="0 0 0.22" xyz="0 0 0.102"/>
     <parent link="lwr_arm_7_link"/>
