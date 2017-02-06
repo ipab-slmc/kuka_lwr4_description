@@ -13,17 +13,15 @@
 
   <property name="arm_velocity_scale_factor" value="1"/>
 
-  <!-- right is either 1 (for right arm) or -1 (for left arm) -->
-  <macro name="kuka_lwr_arm" params="parent name right *origin">
+  <macro name="kuka_lwr_arm" params="parent name right gazebo transmission collisionsimple visualsimple *origin">
 
-    <!-- First (shoulder) element of the arm. Fixed to its parent. -->
     <joint name="${parent}_${name}_arm_base_joint" type="fixed">
       <insert_block name="origin"/>
       <parent link="${parent}"/>
-      <child link="calib_${name}_arm_base_link"/>
+      <child link="base"/>
     </joint>
 
-    <link name="calib_${name}_arm_base_link">
+    <link name="base">
       <inertial>
         <mass value="${arm_elem_base_mass}"/>
         <origin xyz="0 0 0.055"/>
@@ -31,29 +29,64 @@
                               mass="${arm_elem_base_mass}"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/base.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/base.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="Blue"/>
       </visual>
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0.04 0 0.03"/>
+        <geometry>
+          <box size="0.08 0.12 0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0.055" rpy="0 0 ${M_PI}"/>
         <geometry>
-<!--          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_base_convex.stl"/> -->
-          <cylinder radius="0.07" length="0.11"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_base_convex.stl"/>
         </geometry>
       </collision>
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
+      <collision>
+        <origin rpy="0 0 0" xyz="0.04 0 0.03"/>
+        <geometry>
+          <box size="0.08 0.12 0.06"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="calib_${name}_arm_base_link">
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
-    
-    <!-- Second segment of the arm. Joint along z-axis -->
+    </xacro:if>
+
     <joint name="${name}_arm_0_joint" type="revolute">
-      <origin xyz="0 0 0.11" rpy="0 0 0"/>
+      <origin xyz="0 0 0.11" rpy="0 0 ${M_PI}"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-170 * M_PI / 180}" upper="${170 * M_PI / 180}"
              effort="204" velocity="${arm_velocity_scale_factor * 110 * M_PI / 180}" />
@@ -62,7 +95,7 @@
                          k_position="30"
                          k_velocity="30"/>
       <dynamics damping="1.0"/>
-      <parent link="calib_${name}_arm_base_link"/>
+      <parent link="base"/>
       <child link="${name}_arm_1_link"/>
     </joint>
 
@@ -74,56 +107,80 @@
                             mass="${arm_elem_link_mass}"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 -0.008" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_1.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_1.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="Blue"/>
       </visual>
-<!--
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.12"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
+        <geometry>
+          <sphere radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
         </geometry>
       </collision>
- -->     
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
       <collision>
-        <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <cylinder length="0.1" radius="0.06"/>
         </geometry>
       </collision>
-      
       <collision>
-        <origin xyz="0 -0.06 0.2" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
         <geometry>
-          <sphere radius="0.07"/>
-        </geometry>
+          <sphere radius="0.06"/>
+      </geometry>
       </collision>
-      
-      <collision>
-        <origin xyz="0 -0.03 0.1" rpy="0.291 0 0"/>
-        <geometry>
-          <cylinder radius="0.07" length="0.208"/>
-        </geometry>
-      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_1_link">
       <gravity>0</gravity>
     </gazebo>
+    </xacro:if>
 
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_0_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_0_motor"/>
       <joint name="${name}_arm_0_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
     <!-- Third segment of the arm. Joint along y-axis -->
     <joint name="${name}_arm_1_joint" type="revolute">
-      <origin xyz="0 0 0.2005" rpy="0 0 0"/>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
       <limit lower="${-120 * M_PI / 180}" upper="${120 * M_PI / 180}"
              effort="306" velocity="${arm_velocity_scale_factor * 110 * M_PI / 180}" />
@@ -144,54 +201,77 @@
                             mass="${arm_elem_link_mass}"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_2.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_2.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="Blue"/>
       </visual>
-<!--
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.15"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0.04 0.08"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0.04 0"/>
+        <geometry>
+          <sphere radius="0.06"/>
+        </geometry>
+      <material name="Blue"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0.2" rpy="${M_PI} 0 0"/>
         <geometry>
           <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
         </geometry>
       </collision>
--->
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
       <collision>
-        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0.15"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <cylinder length="0.1" radius="0.06"/>
         </geometry>
       </collision>
-      
       <collision>
-        <origin xyz="0 0.06 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0.04 0"/>
         <geometry>
-          <sphere radius="0.07"/>
-        </geometry>
+        <sphere radius="0.06"/>
+      </geometry>
       </collision>
-      
-      <collision>
-        <origin xyz="0 0.03 0.1" rpy="0.291 0 0"/>
-        <geometry>
-          <cylinder radius="0.07" length="0.208"/>
-        </geometry>
-      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_2_link">
       <gravity>0</gravity>
     </gazebo>
+    </xacro:if>
     
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_1_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_1_motor"/>
       <joint name="${name}_arm_1_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
-    <!-- Fourth element of the arm. z-axis -->
     <joint name="${name}_arm_2_joint" type="revolute">
       <origin xyz="0 0 0.20" rpy="0 0 0"/>
       <axis xyz="0 0 1"/>
@@ -214,52 +294,76 @@
                             mass="${arm_elem_link_mass}"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 -0.008" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_3.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_3.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="Blue"/>
       </visual>
-<!--
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0.04 0.12"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0.04 0.2"/>
+        <geometry>
+          <sphere radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
           <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
         </geometry>
       </collision>
--->
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
       <collision>
-        <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <cylinder length="0.1" radius="0.06"/>
         </geometry>
       </collision>
-      
       <collision>
-        <origin xyz="0 0.06 0.2" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0.04 0.2"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <sphere radius="0.06"/>
         </geometry>
       </collision>
-      
-      <collision>
-        <origin xyz="0 0.03 0.1" rpy="-0.291 0 0"/>
-        <geometry>
-          <cylinder radius="0.07" length="0.208"/>
-        </geometry>
-      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_3_link">
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
+    </xacro:if>
 
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_2_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_2_motor"/>
       <joint name="${name}_arm_2_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
     <!-- fifth element of the arm. x-axis -->
     <joint name="${name}_arm_3_joint" type="revolute">
@@ -284,54 +388,77 @@
                             mass="${arm_elem_link_mass}"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_4.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_4.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="Blue"/>
       </visual>
-<!--
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.15"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.08"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.04 0"/>
+        <geometry>
+          <sphere radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0.2" rpy="0 ${M_PI} 0"/>
         <geometry>
           <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
         </geometry>
       </collision>
--->
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
       <collision>
-        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0.15"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <cylinder length="0.1" radius="0.06"/>
         </geometry>
       </collision>
-      
       <collision>
-        <origin xyz="0 -0.06 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 -0.04 0"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <sphere radius="0.06"/>
         </geometry>
       </collision>
-      
-      <collision>
-        <origin xyz="0 -0.03 0.1" rpy="-0.291 0 0"/>
-        <geometry>
-          <cylinder radius="0.07" length="0.208"/>
-        </geometry>
-      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_4_link">
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
+    </xacro:if>
 
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_3_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_3_motor"/>
       <joint name="${name}_arm_3_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
-    <!-- Sixth element of the arm. z-axis -->
     <joint name="${name}_arm_4_joint" type="revolute">
       <origin xyz="0 0 0.20" rpy="0 0 0"/>
       <axis xyz="0 0 1"/>
@@ -354,52 +481,76 @@
                             mass="${arm_elem_link_mass}"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 -0.008" rpy="0 0 0"/>
         <geometry name="${name}_arm_5_geom">
-          <mesh filename="package://lwr_defs/meshes/lwr/link_5.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_5.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="Blue"/>
       </visual>
-<!--
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <geometry>
+          <cylinder length="0.1" radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.12"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
+        <geometry>
+          <sphere radius="0.06"/>
+        </geometry>
+        <material name="Blue"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_last_convex.stl"/>
         </geometry>
       </collision>
--->
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
       <collision>
-        <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <cylinder length="0.1" radius="0.06"/>
         </geometry>
       </collision>
-      
       <collision>
-        <origin xyz="0 -0.04 0.19" rpy="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 -0.04 0.2"/>
         <geometry>
-          <sphere radius="0.07"/>
+          <sphere radius="0.06"/>
         </geometry>
       </collision>
-      
-      <collision>
-        <origin xyz="0 -0.02 0.095" rpy="0.207 0 0"/>
-        <geometry>
-          <cylinder radius="0.07" length="0.198"/>
-        </geometry>
-      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_5_link">
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
+    </xacro:if>
     
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_4_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_4_motor"/>
       <joint name="${name}_arm_4_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
     <joint name="${name}_arm_5_joint" type="revolute">
       <origin xyz="0 0 0.19" rpy="0 0 0"/>
@@ -423,34 +574,72 @@
                             mass="0.2"/>
       </inertial>
 
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_6.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_6.stl"/>
         </geometry>
         <material name="Grey"/>
       </visual>
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0.01 0"/>
+        <geometry>
+          <sphere radius="0.07"/>
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 -0.01 0"/>
+        <geometry>
+          <sphere radius="0.07"/>
+        </geometry>
+      </visual>
+      </xacro:if>
 
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_wrist_convex.stl"/>
         </geometry>
       </collision>
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0.01 0"/>
+        <geometry>
+          <sphere radius="0.07"/>
+        </geometry>
+        <material name="Grey"/>
+      </collision>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 -0.01 0"/>
+        <geometry>
+          <sphere radius="0.07"/>
+        </geometry>
+      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_6_link">
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
+    </xacro:if>
 
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_5_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_5_motor"/>
       <joint name="${name}_arm_5_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
     <joint name="${name}_arm_6_joint" type="revolute">
-      <origin xyz="0 0 0.078" rpy="0 0 0"/>
+      <origin xyz="0 0 0.078" rpy="0 0 ${M_PI}"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-170 * M_PI / 180}" upper="${170 * M_PI / 180}"
              effort="204" velocity="${arm_velocity_scale_factor * 180 * M_PI / 180}" />
@@ -470,30 +659,57 @@
         <cuboid_inertia_def length="1" width="1" height="1"
                             mass="0.2"/>
       </inertial>
+
+      <xacro:unless value="${visualsimple}">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_7.STL"/>
+          <mesh filename="package://lwr_defs/meshes/lwr/link_7.stl"/>
         </geometry>
         <material name="Grey"/>
       </visual>
+      </xacro:unless>
+      <xacro:if value="${visualsimple}">
+      <visual>
+        <origin rpy="0 0 -0.785398163397" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.04"/>
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+      </xacro:if>
+
+      <xacro:unless value="${collisionsimple}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${right * -1/4 * M_PI}"/>
         <geometry>
           <cylinder radius="0.04" length="0.05"/>
         </geometry>
       </collision>
+      </xacro:unless>
+      <xacro:if value="${collisionsimple}">
+      <collision>
+        <origin rpy="0 0 -0.785398163397" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.04"/>
+        </geometry>
+      </collision>
+      </xacro:if>
     </link>
 
+    <xacro:if value="${gazebo}">
     <gazebo reference="${name}_arm_7_link">
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
+    </xacro:if>
     
+    <xacro:if value="${transmission}">
     <transmission name="${name}_arm_6_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_6_motor"/>
       <joint name="${name}_arm_6_joint"/>
       <mechanicalReduction>1.0</mechanicalReduction>
     </transmission>
+    </xacro:if>
 
   </macro>
 

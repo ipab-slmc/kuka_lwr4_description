@@ -1,46 +1,51 @@
 <?xml version="1.0"?>
-<robot name="lwr">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lwr">
+
+  <xacro:arg name="use_gazebo" default="1"/>
+  <xacro:arg name="use_transmission" default="1"/>
+  <xacro:arg name="collision_simple" default="1"/>
+  <xacro:arg name="visual_simple" default="0"/>
+  <xacro:arg name="tool_ft" default="0"/>
+  <xacro:arg name="tool_pen" default="0"/>
+  <xacro:arg name="tool_sdh" default="0"/>
 
   <xacro:include filename="$(find lwr_defs)/defs/kuka_lwr_arm_defs.xml"/>
-  <xacro:include filename="$(find lwr_defs)/defs/gazebo_defs.xml"/>
+  <xacro:if value="$(arg use_gazebo)">
+    <xacro:include filename="$(find lwr_defs)/defs/gazebo_defs.xml"/>
+  </xacro:if>
   <xacro:include filename="$(find lwr_defs)/defs/materials.xml"/>
-<!--
-  <link name="dupa" >
+
+  <link name="world_frame">
+      <visual>
+        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.7 0.75 0.04"/>
+        </geometry>
+        <material name="DarkGrey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.7 0.75 0.04"/>
+        </geometry>
+      </collision>
   </link>
   
-  <joint name="arm_world_joint" type="fixed">
-    <origin xyz="0 0 0.3" rpy="0 0 0"/>
-    <parent link="world"/>
-    <child link="world_link"/>
-  </joint>
--->
-  <link name="world_link">
-  
-    <inertial>
-      <mass value="50.0"/>
-      <com xyz="0 0 0"/>
-      <inertia  ixx="0.01" ixy="0.00"  ixz="0.00"
-                iyy="0.01" iyz="0.00"
-                izz="0.01" />
-    </inertial>
-
-    <visual>
-      <origin xyz="0 0 0.50" rpy="0 0 0"/>
-      <geometry>
-        <box size="1 1 1.0"/>
-      </geometry>
-    </visual>
->
-    <collision>
-      <origin xyz="0 0 0.50" rpy="0 0 0"/>
-      <geometry>
-        <box size="1 1 1.0"/>
-      </geometry>
-    </collision> -->
-  </link> 
-  
-  <kuka_lwr_arm parent="world" name="lwr" right="1">
-    <origin xyz="0 0 1.1" rpy="0 0 0"/>
+  <kuka_lwr_arm parent="world_frame" name="lwr" right="1" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)" collisionsimple="$(arg collision_simple)" visualsimple="$(arg visual_simple)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </kuka_lwr_arm>
+
+  <xacro:if value="$(arg tool_ft)">
+    <xacro:include filename="$(find lwr_defs)/defs/force_torque_sensor_defs.xml"/>
+    <force_torque_sensor parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
+  </xacro:if>
+  <xacro:if value="$(arg tool_pen)">
+    <xacro:include filename="$(find lwr_defs)/defs/pen_defs.xml"/>
+    <pen parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
+  </xacro:if>
+  <xacro:if value="$(arg tool_sdh)">
+    <xacro:include filename="$(find lwr_defs)/defs/sdh_defs.xml"/>
+    <sdh parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
+  </xacro:if>
 
 </robot>
