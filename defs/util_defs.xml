@@ -5,10 +5,6 @@
 
   <property name="M_PI" value="3.1415926535897931" />
 
-  <!--
-     Little helper macro to define the inertia matrix needed
-     for links.
-     -->
   <macro name="cuboid_inertia_def" params="width height length mass">
     <inertia ixx="${mass * (height * height + length * length) / 12)}"
              iyy="${mass * (width * width + length * length) / 12)}"
@@ -16,7 +12,6 @@
              ixy="0" iyz="0" ixz="0"/>
   </macro>
 
-  <!-- length is along the y-axis! -->
   <macro name="cylinder_inertia_def" params="radius length mass">
     <inertia ixx="${mass * (3 * radius * radius + length * length) / 12)}"
              iyy="${mass * radius* radius / 2)}"
