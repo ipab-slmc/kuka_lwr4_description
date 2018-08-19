@@ -89,7 +89,7 @@
     <visual>
       <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/base.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/base.obj"/>
       </geometry>
       <material name="Blue"/>
     </visual>
@@ -119,11 +119,25 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.008"/>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0.2"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_1.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/link1.obj"/>
       </geometry>
       <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0.2"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/link1_m.obj"/>
+      </geometry>
+      <material name="Grey"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/kuka_ring.obj"/>
+      </geometry>
+      <material name="Grey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -157,11 +171,25 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_2.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/link2.obj"/>
       </geometry>
       <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/link2_m.obj"/>
+      </geometry>
+      <material name="Grey"/>
+    </visual>
+    <visual>
+      <origin rpy="1.570796327 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/kuka_ring.obj"/>
+      </geometry>
+      <material name="Grey"/>
     </visual>
     <collision>
       <origin rpy="3.14159265359 0 0" xyz="0 0 0.2"/>
@@ -194,11 +222,25 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.008"/>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0.2"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_3.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/link3.obj"/>
       </geometry>
       <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0.2"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/link3_m.obj"/>
+      </geometry>
+      <material name="Grey"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/kuka_ring.obj"/>
+      </geometry>
+      <material name="Grey"/>
     </visual>
     <collision>
       <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
@@ -232,11 +274,25 @@
       <inertia ixx="0.0136666666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0118666666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_4.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/link4.obj"/>
       </geometry>
       <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/link4_m.obj"/>
+      </geometry>
+      <material name="Grey"/>
+    </visual>
+    <visual>
+      <origin rpy="1.570796327 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/kuka_ring.obj"/>
+      </geometry>
+      <material name="Grey"/>
     </visual>
     <collision>
       <origin rpy="0 3.14159265359 0" xyz="0 0 0.2"/>
@@ -269,11 +325,18 @@
       <inertia ixx="0.0126506666667" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.0108506666667"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.008"/>
+      <origin rpy="0 0 4.71238898" xyz="0 0 0.19"/>
       <geometry name="lwr_arm_5_geom">
-        <mesh filename="package://lwr_defs/meshes/lwr/link_5.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/link5.obj"/>
       </geometry>
       <material name="Blue"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://lwr_defs/meshes/kuka/kuka_ring.obj"/>
+      </geometry>
+      <material name="Grey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -306,9 +369,9 @@
       <inertia ixx="0.000520833333333" ixy="0" ixz="0" iyy="0.000520833333333" iyz="0" izz="0.000520833333333"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_6.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka/kuka_wrist.obj"/>
       </geometry>
       <material name="Grey"/>
     </visual>
@@ -345,7 +408,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://lwr_defs/meshes/lwr/link_7.stl"/>
+        <mesh filename="package://lwr_defs/meshes/kuka_colour/link7.obj"/>
       </geometry>
       <material name="Grey"/>
     </visual>
