@@ -1,5 +1,5 @@
 <package>
-  <name>lwr_defs</name>
+  <name>kuka_lwr4_description</name>
   <version>0.0.1</version>
   <description>This package contains the description (mechanical, kinematic, visual,
   etc.) of the KUKA LWR robot. The files in this package are parsed and used by
