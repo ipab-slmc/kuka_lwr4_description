@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lwr">
+
+  <xacro:arg name="use_gazebo" default="1"/>
+  <xacro:arg name="use_transmission" default="1"/>
+  <xacro:arg name="collision_simple" default="1"/>
+  <xacro:arg name="visual_simple" default="0"/>
+
+  <!-- KUKA LWR4 arm -->
+  <xacro:include filename="$(find kuka_lwr4_description)/robots/kuka_lwr_arm.urdf.xml"/>
+
+  <!-- pen -->
+  <xacro:include filename="$(find kuka_lwr4_description)/defs/pen_defs.xml"/>
+  <pen parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
+
+</robot>

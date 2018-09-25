@@ -4,7 +4,7 @@
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
 
-  <xacro:include filename="$(find lwr_defs)/defs/util_defs.xml"/>
+  <xacro:include filename="$(find kuka_lwr4_description)/defs/util_defs.xml"/>
 
   <property name="arm_elem_base_mass" value="2.0"/>
   <property name="arm_elem_link_mass" value="2.0"/>
@@ -33,7 +33,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/base.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/base.stl"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -59,7 +59,7 @@
       <collision>
         <origin xyz="0 0 0.055" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_base_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_base_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -111,7 +111,7 @@
       <visual>
         <origin xyz="0 0 -0.008" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_1.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_1.stl"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -144,7 +144,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_a_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -205,7 +205,7 @@
       <visual>
         <origin xyz="0 0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_2.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_2.stl"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -238,7 +238,7 @@
       <collision>
         <origin xyz="0 0 0.2" rpy="${M_PI} 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_b_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -298,7 +298,7 @@
       <visual>
         <origin xyz="0 0 -0.008" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_3.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_3.stl"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -331,7 +331,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_a_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -392,7 +392,7 @@
       <visual>
         <origin xyz="0 0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_4.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_4.stl"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -425,7 +425,7 @@
       <collision>
         <origin xyz="0 0 0.2" rpy="0 ${M_PI} 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_b_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -485,7 +485,7 @@
       <visual>
         <origin xyz="0 0 -0.008" rpy="0 0 0"/>
         <geometry name="${name}_arm_5_geom">
-          <mesh filename="package://lwr_defs/meshes/lwr/link_5.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_5.stl"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -518,7 +518,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_last_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_last_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -578,7 +578,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_6.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_6.stl"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -603,7 +603,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_wrist_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_wrist_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -664,7 +664,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_7.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/link_7.stl"/>
         </geometry>
         <material name="Grey"/>
       </visual>
