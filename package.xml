@@ -1,4 +1,4 @@
-<package>
+<package format="2">
   <name>kuka_lwr4_description</name>
   <version>0.0.1</version>
   <description>This package contains the description (mechanical, kinematic, visual,
@@ -10,9 +10,12 @@
   <license>BSD</license>
 
   <author>Konrad Banachowicz</author>
+  <author>Vladimir Ivan</author>
+  <author>Wolfgang Merkt</author>
+  <author>Christian Rauch</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>xacro</run_depend>
+  <depend>xacro</depend>
 
 </package>
