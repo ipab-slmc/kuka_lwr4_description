@@ -6,17 +6,17 @@
 
   <xacro:include filename="$(find kuka_lwr4_description)/defs/util_defs.xml"/>
 
-  <property name="arm_elem_base_mass" value="2.0"/>
-  <property name="arm_elem_link_mass" value="2.0"/>
-  <property name="arm_elem_end_link_mass" value="2.0"/>
-  <property name="arm_elem_ball_link_mass" value="2.0"/>
+  <xacro:property name="arm_elem_base_mass" value="2.0"/>
+  <xacro:property name="arm_elem_link_mass" value="2.0"/>
+  <xacro:property name="arm_elem_end_link_mass" value="2.0"/>
+  <xacro:property name="arm_elem_ball_link_mass" value="2.0"/>
 
-  <property name="arm_velocity_scale_factor" value="1"/>
+  <xacro:property name="arm_velocity_scale_factor" value="1"/>
 
-  <macro name="kuka_lwr_arm" params="parent name right gazebo transmission collisionsimple visualsimple *origin">
+  <xacro:macro name="kuka_lwr_arm" params="parent name right gazebo transmission collisionsimple visualsimple *origin">
 
     <joint name="${parent}_${name}_arm_base_joint" type="fixed">
-      <insert_block name="origin"/>
+      <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="base"/>
     </joint>
@@ -774,6 +774,6 @@
     </transmission>
     </xacro:if>
 
-  </macro>
+  </xacro:macro>
 
 </robot>

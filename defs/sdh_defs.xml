@@ -4,7 +4,7 @@
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
 
-<macro name="sdh" params="parent gazebo transmission">
+<xacro:macro name="sdh" params="parent gazebo transmission">
   <!-- SHD hand-->
     <!-- joint between end-effector and sdh_palm_link -->
     <joint name="sdh_palm_joint" type="fixed" >
@@ -352,6 +352,6 @@
         </geometry>
       </collision>
     </link>
-</macro>
+</xacro:macro>
 
 </robot>
