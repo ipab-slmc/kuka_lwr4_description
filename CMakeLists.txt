@@ -11,21 +11,9 @@ catkin_package(CATKIN_DEPENDS xacro)
 # find all LWR robots with tools
 file(GLOB xacro_files ${CMAKE_CURRENT_SOURCE_DIR}/robots/lwr_*.urdf.xacro)
 
-foreach(it ${xacro_files})
-  # remove .xacro extension
-  string(REGEX MATCH "(.*)[.]xacro$" unused ${it})
-  set(output_filename ${CMAKE_MATCH_1})
+xacro_add_files(${xacro_files} REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION robots)
 
-  # create a rule to generate ${output_filename} from {it}
-  xacro_add_xacro_file(${it} ${output_filename})
-
-  list(APPEND urdf_files ${output_filename})
-endforeach(it)
-
-add_custom_target(media_files ALL DEPENDS ${urdf_files})
-
-
-foreach(dir calibration defs meshes robots)
+foreach(dir calibration meshes)
    install(DIRECTORY ${dir}/
       DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
