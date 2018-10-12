@@ -16,7 +16,7 @@ set(xacro_files
 
 xacro_add_files(${xacro_files} REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION robots)
 
-foreach(dir calibration meshes)
+foreach(dir meshes)
     install(DIRECTORY ${dir}/
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
