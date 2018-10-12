@@ -17,5 +17,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <depend>xacro</depend>
+  <depend>schunk_description</depend>
 
 </package>
