@@ -13,7 +13,7 @@
   <xacro:include filename="$(find schunk_description)/urdf/sdh/sdh.urdf.xacro"/>
   <xacro:include filename="$(find schunk_description)/urdf/materials.urdf.xacro"/>
   <schunk_sdh name="sdh" parent="lwr_arm_7_link">
-    <origin rpy="0.0 0.0 1.57079" xyz="0 0 0.022"/>
+    <origin rpy="0.0 0.0 ${0.5*M_PI}" xyz="0 0 0.022"/>
   </schunk_sdh>
 
   <xacro:if value="$(arg use_transmission)">
