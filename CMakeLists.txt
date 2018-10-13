@@ -14,7 +14,7 @@ set(xacro_files
     ${CMAKE_CURRENT_SOURCE_DIR}/robots/lwr_sdh.urdf.xacro
 )
 
-xacro_add_files(${xacro_files} REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION robots)
+xacro_add_files(${xacro_files} INORDER REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION robots)
 
 foreach(dir meshes)
     install(DIRECTORY ${dir}/
