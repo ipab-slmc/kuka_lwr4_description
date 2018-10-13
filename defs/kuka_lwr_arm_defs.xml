@@ -2,21 +2,21 @@
 <robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
        xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
-       xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find lwr_defs)/defs/util_defs.xml"/>
+  <xacro:include filename="$(find kuka_lwr4_description)/defs/util_defs.xml"/>
 
-  <property name="arm_elem_base_mass" value="2.0"/>
-  <property name="arm_elem_link_mass" value="2.0"/>
-  <property name="arm_elem_end_link_mass" value="2.0"/>
-  <property name="arm_elem_ball_link_mass" value="2.0"/>
+  <xacro:property name="arm_elem_base_mass" value="2.0"/>
+  <xacro:property name="arm_elem_link_mass" value="2.0"/>
+  <xacro:property name="arm_elem_end_link_mass" value="2.0"/>
+  <xacro:property name="arm_elem_ball_link_mass" value="2.0"/>
 
-  <property name="arm_velocity_scale_factor" value="1"/>
+  <xacro:property name="arm_velocity_scale_factor" value="1"/>
 
-  <macro name="kuka_lwr_arm" params="parent name right gazebo transmission collisionsimple visualsimple *origin">
+  <xacro:macro name="kuka_lwr_arm" params="parent name right gazebo transmission collisionsimple visualsimple *origin">
 
     <joint name="${parent}_${name}_arm_base_joint" type="fixed">
-      <insert_block name="origin"/>
+      <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="base"/>
     </joint>
@@ -33,7 +33,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/base.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/base.obj"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -59,7 +59,7 @@
       <collision>
         <origin xyz="0 0 0.055" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_base_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_base_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -109,11 +109,25 @@
 
       <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 -0.008" rpy="0 0 0"/>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_1.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link1.obj"/>
         </geometry>
         <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link1_m.obj"/>
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+        </geometry>
+        <material name="Grey"/>
       </visual>
       </xacro:unless>
       <xacro:if value="${visualsimple}">
@@ -144,7 +158,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_a_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -203,11 +217,25 @@
 
       <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_2.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link2.obj"/>
         </geometry>
         <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link2_m.obj"/>
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+      <visual>
+        <origin rpy="${0.5*M_PI} 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+        </geometry>
+        <material name="Grey"/>
       </visual>
       </xacro:unless>
       <xacro:if value="${visualsimple}">
@@ -238,7 +266,7 @@
       <collision>
         <origin xyz="0 0 0.2" rpy="${M_PI} 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_b_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -263,7 +291,7 @@
       <gravity>0</gravity>
     </gazebo>
     </xacro:if>
-    
+
     <xacro:if value="${transmission}">
     <transmission name="${name}_arm_1_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_1_motor"/>
@@ -296,11 +324,25 @@
 
       <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 -0.008" rpy="0 0 0"/>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_3.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link3.obj"/>
         </geometry>
         <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link3_m.obj"/>
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+        </geometry>
+        <material name="Grey"/>
       </visual>
       </xacro:unless>
       <xacro:if value="${visualsimple}">
@@ -331,7 +373,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_a_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_a_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -390,11 +432,25 @@
 
       <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_4.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link4.obj"/>
         </geometry>
         <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link4_m.obj"/>
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+      <visual>
+        <origin rpy="${0.5*M_PI} 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+        </geometry>
+        <material name="Grey"/>
       </visual>
       </xacro:unless>
       <xacro:if value="${visualsimple}">
@@ -425,7 +481,7 @@
       <collision>
         <origin xyz="0 0 0.2" rpy="0 ${M_PI} 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_b_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_b_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -483,11 +539,18 @@
 
       <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 -0.008" rpy="0 0 0"/>
+        <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.19"/>
         <geometry name="${name}_arm_5_geom">
-          <mesh filename="package://lwr_defs/meshes/lwr/link_5.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link5.obj"/>
         </geometry>
         <material name="Blue"/>
+      </visual>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+        </geometry>
+        <material name="Grey"/>
       </visual>
       </xacro:unless>
       <xacro:if value="${visualsimple}">
@@ -518,7 +581,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_segment_last_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_segment_last_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -543,7 +606,7 @@
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
     </xacro:if>
-    
+
     <xacro:if value="${transmission}">
     <transmission name="${name}_arm_4_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_4_motor"/>
@@ -576,9 +639,9 @@
 
       <xacro:unless value="${visualsimple}">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin rpy="0 0 ${M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_6.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_wrist.obj"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -603,7 +666,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/convex/arm_wrist_convex.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/lwr/convex/arm_wrist_convex.stl"/>
         </geometry>
       </collision>
       </xacro:unless>
@@ -652,7 +715,7 @@
       <child link="${name}_arm_7_link"/>
     </joint>
 
-<link name="${name}_arm_7_link">
+    <link name="${name}_arm_7_link">
       <inertial>
         <mass value="0.2"/>
         <origin xyz="0 0 0"/>
@@ -664,7 +727,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://lwr_defs/meshes/lwr/link_7.stl"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link7.obj"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -702,7 +765,7 @@
       <turnGravityOff>true</turnGravityOff>
     </gazebo>
     </xacro:if>
-    
+
     <xacro:if value="${transmission}">
     <transmission name="${name}_arm_6_trans" type="SimpleTransmission">
       <actuator name="${name}_arm_6_motor"/>
@@ -711,6 +774,6 @@
     </transmission>
     </xacro:if>
 
-  </macro>
+  </xacro:macro>
 
 </robot>

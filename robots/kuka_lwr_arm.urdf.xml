@@ -5,15 +5,12 @@
   <xacro:arg name="use_transmission" default="1"/>
   <xacro:arg name="collision_simple" default="1"/>
   <xacro:arg name="visual_simple" default="0"/>
-  <xacro:arg name="tool_ft" default="0"/>
-  <xacro:arg name="tool_pen" default="0"/>
-  <xacro:arg name="tool_sdh" default="0"/>
 
-  <xacro:include filename="$(find lwr_defs)/defs/kuka_lwr_arm_defs.xml"/>
+  <xacro:include filename="$(find kuka_lwr4_description)/defs/kuka_lwr_arm_defs.xml"/>
   <xacro:if value="$(arg use_gazebo)">
-    <xacro:include filename="$(find lwr_defs)/defs/gazebo_defs.xml"/>
+    <xacro:include filename="$(find kuka_lwr4_description)/defs/gazebo_defs.xml"/>
   </xacro:if>
-  <xacro:include filename="$(find lwr_defs)/defs/materials.xml"/>
+  <xacro:include filename="$(find kuka_lwr4_description)/defs/materials.xml"/>
 
   <link name="world_frame">
       <visual>
@@ -30,22 +27,9 @@
         </geometry>
       </collision>
   </link>
-  
+
   <kuka_lwr_arm parent="world_frame" name="lwr" right="1" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)" collisionsimple="$(arg collision_simple)" visualsimple="$(arg visual_simple)">
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </kuka_lwr_arm>
-
-  <xacro:if value="$(arg tool_ft)">
-    <xacro:include filename="$(find lwr_defs)/defs/force_torque_sensor_defs.xml"/>
-    <force_torque_sensor parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
-  </xacro:if>
-  <xacro:if value="$(arg tool_pen)">
-    <xacro:include filename="$(find lwr_defs)/defs/pen_defs.xml"/>
-    <pen parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
-  </xacro:if>
-  <xacro:if value="$(arg tool_sdh)">
-    <xacro:include filename="$(find lwr_defs)/defs/sdh_defs.xml"/>
-    <sdh parent="lwr_arm_7_link" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)"/>
-  </xacro:if>
 
 </robot>

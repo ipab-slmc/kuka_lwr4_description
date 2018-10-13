@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lwr">
+
+  <xacro:arg name="use_gazebo" default="1"/>
+  <xacro:arg name="use_transmission" default="1"/>
+  <xacro:arg name="collision_simple" default="1"/>
+  <xacro:arg name="visual_simple" default="0"/>
+
+  <!-- KUKA LWR4 arm -->
+  <xacro:include filename="$(find kuka_lwr4_description)/robots/kuka_lwr_arm.urdf.xml"/>
+
+  <!-- Schunk SDH2 hand -->
+  <xacro:include filename="$(find schunk_description)/urdf/sdh/sdh.urdf.xacro"/>
+  <xacro:include filename="$(find schunk_description)/urdf/materials.urdf.xacro"/>
+  <schunk_sdh name="sdh" parent="lwr_arm_7_link">
+    <origin rpy="0.0 0.0 ${0.5*M_PI}" xyz="0 0 0.022"/>
+  </schunk_sdh>
+
+  <xacro:if value="$(arg use_transmission)">
+    <xacro:include filename="$(find schunk_description)/urdf/sdh/sdh.transmission.xacro"/>
+    <schunk_sdh_transmission name="sdh"/>
+  </xacro:if>
+
+  <xacro:if value="$(arg use_gazebo)">
+    <xacro:include filename="$(find schunk_description)/urdf/sdh/sdh.gazebo.xacro"/>
+    <schunk_sdh_gazebo name="sdh"/>
+  </xacro:if>
+
+</robot>
