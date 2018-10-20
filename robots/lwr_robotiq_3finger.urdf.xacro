@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lwr">
+
+  <xacro:arg name="use_gazebo" default="1"/>
+  <xacro:arg name="use_transmission" default="1"/>
+  <xacro:arg name="collision_simple" default="1"/>
+  <xacro:arg name="visual_simple" default="0"/>
+
+  <!-- KUKA LWR4 arm -->
+  <xacro:include filename="$(find kuka_lwr4_description)/robots/kuka_lwr_arm.urdf.xml"/>
+
+  <!-- Robotiq 3 finger hand -->
+  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_articulated_macro.xacro" />
+	<xacro:s-model_articulated prefix="robotiq_"/>
+
+  <!-- connector with thread, length: 22mm -->
+  <joint name="lwr_connector_joint" type="fixed">
+    <origin xyz="0 0 0.022"/>
+    <parent link="lwr_arm_7_link"/>
+    <child link="lwr_connector"/>
+  </joint>
+  <link name="lwr_connector">
+    <visual>
+      <origin xyz="0 0 -0.011"/>
+      <geometry>
+        <cylinder length="0.022" radius="0.03"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- threading connector: 8mm -->
+  <!-- aluminium ring: 12mm -->
+  <joint name="robotiq_connector_joint" type="fixed">
+    <parent link="lwr_connector"/>
+    <child link="robotiq_connector"/>
+  </joint>
+  <link name="robotiq_connector">
+    <visual>
+      <origin xyz="0 0 0.01"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.04"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="robotiq_coupling_joint" type="fixed">
+    <origin xyz="0 0 0.02"/>
+    <parent link="robotiq_connector"/>
+    <child link="robotiq_coupling"/>
+  </joint>
+
+  <!-- blank coupling, length: 15.9mm, diameter: 80mm -->
+  <link name="robotiq_coupling">
+    <visual>
+      <origin rpy="${0.5*M_PI} 0 0"/>
+      <geometry>
+        <mesh filename="package://kuka_lwr4_description/meshes/robotiq/AGS-CPL-175_20171219.obj"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- coupling plate, length: 3.175mm, diameter: 80mm -->
+  <!-- palm origin z-axis offset: 41.275mm -->
+  <!-- z-axis orientation offset: 10 deg = 0.174533 rad -->
+  <joint name="robotiq_palm_joint" type="fixed">
+    <origin rpy="${0.5*M_PI} 0 ${-0.5*M_PI+10/180*M_PI}" xyz="0 0 0.06035"/>
+    <parent link="robotiq_coupling"/>
+    <child link="robotiq_palm"/>
+  </joint>
+
+</robot>
