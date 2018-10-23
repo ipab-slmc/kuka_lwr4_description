@@ -18,6 +18,6 @@
 
   <depend>xacro</depend>
   <depend>schunk_description</depend>
-  <depend>robotiq_s_model_visualization</depend>
+  <depend>robotiq_3f_gripper_visualization</depend>
 
 </package>
