@@ -10,8 +10,8 @@
   <xacro:include filename="$(find kuka_lwr4_description)/robots/kuka_lwr_arm.urdf.xml"/>
 
   <!-- Robotiq 3 finger hand -->
-  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_articulated_macro.xacro" />
-	<xacro:s-model_articulated prefix="robotiq_"/>
+  <xacro:include filename="$(find robotiq_3f_gripper_visualization)/cfg/robotiq-3f-gripper_articulated_macro.xacro" />
+	<xacro:robotiq-3f-gripper_finger_articulated prefix="robotiq_"/>
 
   <!-- connector with thread, length: 22mm -->
   <joint name="lwr_connector_joint" type="fixed">
