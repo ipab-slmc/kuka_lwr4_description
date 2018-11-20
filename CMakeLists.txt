@@ -18,6 +18,9 @@ set(xacro_files
 
 xacro_add_files(${xacro_files} INORDER REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION urdf)
 
+install(DIRECTORY srdf
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
 foreach(dir meshes)
     install(DIRECTORY ${dir}/
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
