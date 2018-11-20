@@ -12,7 +12,7 @@
   </xacro:if>
   <xacro:include filename="$(find kuka_lwr4_description)/urdf/defs/materials.xml"/>
 
-  <link name="world_frame">
+  <link name="table">
       <visual>
         <origin xyz="0 0 -0.02" rpy="0 0 0"/>
         <geometry>
@@ -28,7 +28,7 @@
       </collision>
   </link>
 
-  <kuka_lwr_arm parent="world_frame" name="lwr" right="1" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)" collisionsimple="$(arg collision_simple)" visualsimple="$(arg visual_simple)">
+  <kuka_lwr_arm parent="table" name="lwr" right="1" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)" collisionsimple="$(arg collision_simple)" visualsimple="$(arg visual_simple)">
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </kuka_lwr_arm>
 
