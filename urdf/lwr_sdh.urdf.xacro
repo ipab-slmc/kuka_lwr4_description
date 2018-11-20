@@ -7,7 +7,7 @@
   <xacro:arg name="visual_simple" default="0"/>
 
   <!-- KUKA LWR4 arm -->
-  <xacro:include filename="$(find kuka_lwr4_description)/robots/kuka_lwr_arm.urdf.xml"/>
+  <xacro:include filename="$(find kuka_lwr4_description)/urdf/lwr.urdf.xacro"/>
 
   <!-- Schunk SDH2 hand -->
   <xacro:include filename="$(find schunk_description)/urdf/sdh/sdh.urdf.xacro"/>

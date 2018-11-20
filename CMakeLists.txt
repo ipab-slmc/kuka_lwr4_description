@@ -9,13 +9,14 @@ catkin_package(CATKIN_DEPENDS xacro)
 # source: http://wiki.ros.org/xacro#Building_from_CMakeLists.txt
 
 set(xacro_files
-    ${CMAKE_CURRENT_SOURCE_DIR}/robots/lwr_ft.urdf.xacro
-    ${CMAKE_CURRENT_SOURCE_DIR}/robots/lwr_pen.urdf.xacro
-    ${CMAKE_CURRENT_SOURCE_DIR}/robots/lwr_sdh.urdf.xacro
-    ${CMAKE_CURRENT_SOURCE_DIR}/robots/lwr_robotiq_3finger.urdf.xacro
+    ${CMAKE_CURRENT_SOURCE_DIR}/urdf/lwr.urdf.xacro
+    ${CMAKE_CURRENT_SOURCE_DIR}/urdf/lwr_ft.urdf.xacro
+    ${CMAKE_CURRENT_SOURCE_DIR}/urdf/lwr_pen.urdf.xacro
+    ${CMAKE_CURRENT_SOURCE_DIR}/urdf/lwr_sdh.urdf.xacro
+    ${CMAKE_CURRENT_SOURCE_DIR}/urdf/lwr_robotiq_3finger.urdf.xacro
 )
 
-xacro_add_files(${xacro_files} INORDER REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION robots)
+xacro_add_files(${xacro_files} INORDER REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION urdf)
 
 foreach(dir meshes)
     install(DIRECTORY ${dir}/
