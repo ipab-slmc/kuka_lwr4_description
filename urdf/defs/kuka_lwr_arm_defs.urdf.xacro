@@ -4,7 +4,7 @@
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find kuka_lwr4_description)/defs/util_defs.xml"/>
+  <xacro:include filename="$(find kuka_lwr4_description)/urdf/defs/util_defs.xacro"/>
 
   <xacro:property name="arm_elem_base_mass" value="2.0"/>
   <xacro:property name="arm_elem_link_mass" value="2.0"/>
