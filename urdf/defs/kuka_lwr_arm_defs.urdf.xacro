@@ -33,7 +33,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/base.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/base.dae"/>
         </geometry>
         <material name="Blue"/>
       </visual>
@@ -111,21 +111,21 @@
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link1.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link1.dae"/>
         </geometry>
         <material name="Blue"/>
       </visual>
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link1_m.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link1_m.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/kuka_ring.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -219,21 +219,21 @@
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link2.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link2.dae"/>
         </geometry>
         <material name="Blue"/>
       </visual>
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link2_m.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link2_m.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
       <visual>
         <origin rpy="${0.5*M_PI} 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/kuka_ring.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -326,21 +326,21 @@
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link3.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link3.dae"/>
         </geometry>
         <material name="Blue"/>
       </visual>
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.2"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link3_m.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link3_m.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/kuka_ring.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -434,21 +434,21 @@
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link4.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link4.dae"/>
         </geometry>
         <material name="Blue"/>
       </visual>
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/link4_m.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link4_m.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
       <visual>
         <origin rpy="${0.5*M_PI} 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/kuka_ring.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -541,14 +541,14 @@
       <visual>
         <origin rpy="0 0 ${1.5*M_PI}" xyz="0 0 0.19"/>
         <geometry name="${name}_arm_5_geom">
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link5.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link5.dae"/>
         </geometry>
         <material name="Blue"/>
       </visual>
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_ring.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/kuka_ring.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -641,7 +641,7 @@
       <visual>
         <origin rpy="0 0 ${M_PI}" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka/kuka_wrist.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/kuka_wrist.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -727,7 +727,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link7.obj"/>
+          <mesh filename="package://kuka_lwr4_description/meshes/kuka_colour/link7.dae"/>
         </geometry>
         <material name="Grey"/>
       </visual>
