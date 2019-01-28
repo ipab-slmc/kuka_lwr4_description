@@ -18,7 +18,10 @@
       <geometry>
         <box size="0.7 0.75 0.04"/>
       </geometry>
-      <material name="DarkGrey"/>
+      <material name="table_brown">
+        <!-- wooden brown table -->
+        <color rgba="0.839215686 0.694117647 0.42745098 1.0"/>
+      </material>
     </visual>
     <collision>
       <origin xyz="0 0 -0.02" rpy="0 0 0"/>
