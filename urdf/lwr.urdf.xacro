@@ -31,6 +31,13 @@
     </collision>
   </link>
 
+  <xacro:if value="$(arg use_gazebo)">
+  <gazebo reference="table">
+    <!-- Gazebo wood texture -->
+    <material>Gazebo/Wood</material>
+  </gazebo>
+  </xacro:if>
+
   <kuka_lwr_arm parent="table" name="lwr" right="1" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)" collisionsimple="$(arg collision_simple)" visualsimple="$(arg visual_simple)">
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </kuka_lwr_arm>
