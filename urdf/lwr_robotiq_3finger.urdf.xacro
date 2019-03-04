@@ -59,7 +59,7 @@
     <visual>
       <origin rpy="${0.5*M_PI} 0 0"/>
       <geometry>
-        <mesh filename="package://kuka_lwr4_description/meshes/robotiq/AGS-CPL-175_20171219.obj"/>
+        <mesh filename="package://kuka_lwr4_description/meshes/robotiq/AGS-CPL-175_20171219.dae"/>
       </geometry>
       <material name="gray">
         <color rgba="0.2 0.2 0.2 1"/>

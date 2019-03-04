@@ -13,20 +13,30 @@
   <xacro:include filename="$(find kuka_lwr4_description)/urdf/defs/materials.xml"/>
 
   <link name="table">
-      <visual>
-        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
-        <geometry>
-          <box size="0.7 0.75 0.04"/>
-        </geometry>
-        <material name="DarkGrey"/>
-      </visual>
-      <collision>
-        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
-        <geometry>
-          <box size="0.7 0.75 0.04"/>
-        </geometry>
-      </collision>
+    <visual>
+      <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.7 0.75 0.04"/>
+      </geometry>
+      <material name="table_brown">
+        <!-- wooden brown table -->
+        <color rgba="0.839215686 0.694117647 0.42745098 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.7 0.75 0.04"/>
+      </geometry>
+    </collision>
   </link>
+
+  <xacro:if value="$(arg use_gazebo)">
+  <gazebo reference="table">
+    <!-- Gazebo wood texture -->
+    <material>Gazebo/Wood</material>
+  </gazebo>
+  </xacro:if>
 
   <kuka_lwr_arm parent="table" name="lwr" right="1" gazebo="$(arg use_gazebo)" transmission="$(arg use_transmission)" collisionsimple="$(arg collision_simple)" visualsimple="$(arg visual_simple)">
     <origin xyz="0 0 0" rpy="0 0 0"/>
