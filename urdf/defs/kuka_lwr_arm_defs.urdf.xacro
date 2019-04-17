@@ -89,7 +89,7 @@
       <origin xyz="0 0 0.11" rpy="0 0 ${M_PI}"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-170 * M_PI / 180}" upper="${170 * M_PI / 180}"
-             effort="204" velocity="${arm_velocity_scale_factor * 110 * M_PI / 180}" />
+             effort="176" velocity="${arm_velocity_scale_factor * 110 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-168 * M_PI / 180}"
                          soft_upper_limit="${168 * M_PI / 180}"
                          k_position="30"
@@ -197,7 +197,7 @@
       <origin xyz="0 0 0.2" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
       <limit lower="${-120 * M_PI / 180}" upper="${120 * M_PI / 180}"
-             effort="306" velocity="${arm_velocity_scale_factor * 110 * M_PI / 180}" />
+             effort="176" velocity="${arm_velocity_scale_factor * 110 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-118 * M_PI / 180}"
                          soft_upper_limit="${118 * M_PI / 180}"
                          k_position="30"
@@ -304,7 +304,7 @@
       <origin xyz="0 0 0.20" rpy="0 0 0"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-170 * M_PI / 180}" upper="${170 * M_PI / 180}"
-             effort="204" velocity="${arm_velocity_scale_factor * 130 * M_PI / 180}" />
+             effort="100" velocity="${arm_velocity_scale_factor * 130 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-168 * M_PI / 180}"
                          soft_upper_limit="${168 * M_PI / 180}"
                          k_position="30"
@@ -412,7 +412,7 @@
       <origin xyz="0 0 0.20" rpy="0 0 0"/>
       <axis xyz="0 -1 0"/>
       <limit lower="${-120 * M_PI / 180}" upper="${120 * M_PI / 180}"
-             effort="306" velocity="${arm_velocity_scale_factor * 130 * M_PI / 180}" />
+             effort="100" velocity="${arm_velocity_scale_factor * 130 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-118 * M_PI / 180}"
                          soft_upper_limit="${118 * M_PI / 180}"
                          k_position="30"
@@ -519,7 +519,7 @@
       <origin xyz="0 0 0.20" rpy="0 0 0"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-170 * M_PI / 180}" upper="${170 * M_PI / 180}"
-             effort="204" velocity="${arm_velocity_scale_factor * 130 * M_PI / 180}" />
+             effort="100" velocity="${arm_velocity_scale_factor * 130 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-168 * M_PI / 180}"
                          soft_upper_limit="${168 * M_PI / 180}"
                          k_position="30"
@@ -619,7 +619,7 @@
       <origin xyz="0 0 0.19" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
       <limit lower="${-120 * M_PI / 180}" upper="${120 * M_PI / 180}"
-             effort="306" velocity="${arm_velocity_scale_factor * 180 * M_PI / 180}" />
+             effort="38" velocity="${arm_velocity_scale_factor * 180 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-118 * M_PI / 180}"
                          soft_upper_limit="${118 * M_PI / 180}"
                          k_position="30"
@@ -705,7 +705,7 @@
       <origin xyz="0 0 0.078" rpy="0 0 ${M_PI}"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-170 * M_PI / 180}" upper="${170 * M_PI / 180}"
-             effort="204" velocity="${arm_velocity_scale_factor * 180 * M_PI / 180}" />
+             effort="38" velocity="${arm_velocity_scale_factor * 180 * M_PI / 180}" />
       <safety_controller soft_lower_limit="${-168 * M_PI / 180}"
                          soft_upper_limit="${168 * M_PI / 180}"
                          k_position="30"
