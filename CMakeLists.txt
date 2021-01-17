@@ -16,7 +16,7 @@ set(xacro_files
     ${CMAKE_CURRENT_SOURCE_DIR}/urdf/lwr_robotiq_3finger.urdf.xacro
 )
 
-xacro_add_files(${xacro_files} INORDER REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION urdf)
+xacro_add_files(${xacro_files} REMAP collision_simple:=0 TARGET media_files INSTALL DESTINATION urdf)
 
 install(DIRECTORY srdf
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
